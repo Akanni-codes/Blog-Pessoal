@@ -28,8 +28,10 @@ export class TemaService {
         postagem: true,
       },
     });
-    if (!tema)
+    if (!tema) {
       throw new HttpException('Tema não encontrado', HttpStatus.NOT_FOUND);
+    }
+
     return tema;
   }
 
