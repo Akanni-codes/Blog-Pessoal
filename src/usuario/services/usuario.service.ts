@@ -39,8 +39,9 @@ export class UsuarioService {
   async create(usuario: Usuario): Promise<Usuario> {
     const buscaUsuario = await this.findByUsuario(usuario.usuario);
 
-    if (buscaUsuario)
+    if (buscaUsuario) {
       throw new HttpException('Usuário já existe!', HttpStatus.BAD_REQUEST);
+    }
 
     usuario.senha = await this.bcrypt.criptografarSenha(usuario.senha);
     return this.usuarioRepository.save(usuario);
@@ -50,11 +51,12 @@ export class UsuarioService {
     await this.findById(usuario.id);
     const buscaUsuario = await this.findByUsuario(usuario.usuario);
 
-    if (buscaUsuario && buscaUsuario.id !== usuario.id)
+    if (buscaUsuario && buscaUsuario.id !== usuario.id) {
       throw new HttpException(
         'Usuário (e-mail) já Cadastrado!',
         HttpStatus.BAD_REQUEST,
       );
+    }
 
     usuario.senha = await this.bcrypt.criptografarSenha(usuario.senha);
     return await this.usuarioRepository.save(usuario);

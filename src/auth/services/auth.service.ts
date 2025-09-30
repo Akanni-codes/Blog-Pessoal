@@ -2,6 +2,7 @@ import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { UsuarioService } from '../../usuario/services/usuario.service';
 import { JwtService } from '@nestjs/jwt';
 import { Bcrypt } from '../bcrypt/bcrypt';
+import { UsuarioLogin } from '../entities/usuariologin.entity';
 
 @Injectable()
 export class AuthService {
@@ -23,6 +24,7 @@ export class AuthService {
     );
 
     if (buscaUsuario && matchPassword) {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const { senha, ...resposta } = buscaUsuario;
       return resposta;
     }
@@ -30,6 +32,7 @@ export class AuthService {
   }
 
   async longin(usuarioLogin: UsuarioLogin) {
+    const payload = { sub: usuarioLogin.usuario };
     const buscaUsuario = await this.usuarioService.findByUsuario(
       usuarioLogin.usuario,
     );
@@ -40,7 +43,7 @@ export class AuthService {
       usuario: usuarioLogin.usuario,
       senha: '',
       foto: buscaUsuario?.foto,
-      token: `Bearer ${this.jwtService.sign}`,
+      token: `Bearer ${this.jwtService.sign(payload)}`,
     };
   }
 }
