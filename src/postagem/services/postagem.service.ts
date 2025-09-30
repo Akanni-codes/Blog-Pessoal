@@ -17,6 +17,7 @@ export class PostagemService {
     return await this.postagemRepository.find({
       relations: {
         tema: true,
+        usuario: true,
       },
     });
   }
@@ -25,6 +26,7 @@ export class PostagemService {
     const postagem = await this.postagemRepository.findOne({
       where: {
         id,
+        usuario: true,
       },
       relations: {
         tema: true,
@@ -44,6 +46,7 @@ export class PostagemService {
       },
       relations: {
         tema: true,
+        usuario: true,
       },
     });
   }
