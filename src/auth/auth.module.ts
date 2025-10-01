@@ -1,3 +1,4 @@
+import { JwtStrategy } from './strategy/jwt.strategy';
 import { forwardRef, Module } from '@nestjs/common';
 import { Bcrypt } from './bcrypt/bcrypt';
 import { UsuarioModule } from '../usuario/usuario.module';
@@ -18,7 +19,7 @@ import { LocalStrategy } from './strategy/local.strategy';
     }),
   ],
   controllers: [AuthController],
-  providers: [Bcrypt, AuthService, LocalStrategy],
+  providers: [Bcrypt, AuthService, LocalStrategy, JwtStrategy],
   exports: [Bcrypt],
 })
 export class AutthModule {}
