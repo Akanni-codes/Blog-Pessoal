@@ -26,10 +26,10 @@ export class PostagemService {
     const postagem = await this.postagemRepository.findOne({
       where: {
         id,
-        usuario: true,
       },
       relations: {
         tema: true,
+        usuario: true,
       },
     });
 
