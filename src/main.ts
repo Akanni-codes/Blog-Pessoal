@@ -8,7 +8,7 @@ async function bootstrap() {
 
   const config = new DocumentBuilder()
     .setTitle('Blog Pessoal')
-    .setDescription('Projeto Blog Pessoal')
+    .setDescription('Projeto Blog Pessoal do Akanni')
     .setContact(
       'Akanni Silva',
       'http://github.com/Akanni-codes',
